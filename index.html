@@ -914,7 +914,7 @@
             </div>
 
             <!-- Download Button -->
-            <div class="mt-4">
+            <!-- <div class="mt-4">
               <button
                 id="download-btn"
                 onclick="downloadCurrentTrack()"
@@ -945,7 +945,7 @@
                   >Select a track to download</span
                 >
               </button>
-            </div>
+            </div> -->
 
             <!-- Hidden audio element -->
             <audio id="audio-player" preload="metadata"></audio>
@@ -978,7 +978,7 @@
           duration: "3:23",
           file: "m1.mp3", // Change to your actual file path
           coverClass: "cover-1",
-          coverEmoji: "🌌",
+          coverEmoji: "👩‍❤️‍💋‍👩",
           coverImage: "p1.jpg", // Set to image path like "covers/track1.jpg" if you have cover images
           year: "2026",
         },
@@ -990,7 +990,7 @@
           duration: "3:16",
           file: "m2.mp3",
           coverClass: "cover-2",
-          coverEmoji: "🌿",
+          coverEmoji: "❤️",
           coverImage: "p2.jpeg",
           year: "2026",
         },
@@ -1002,19 +1002,19 @@
           duration: "3:34",
           file: "m3.mp3",
           coverClass: "cover-3",
-          coverEmoji: "🔥",
+          coverEmoji: "💗",
           coverImage: "p3.jpeg",
           year: "2026",
         },
         {
           id: 4,
-          title: "Mysha-An Unfinished Story 💞",
+          title: "An Unfinished Story-Mysha 💞",
           artist: "Asadullah Atik",
           genre: " Hindi",
           duration: "4:24",
           file: "m4.mp3",
           coverClass: "cover-4",
-          coverEmoji: "🌊",
+          coverEmoji: "💞",
           coverImage: "p4.jpeg",
           year: "2026",
         },
@@ -1362,7 +1362,7 @@
         if (currentIndex >= 0) {
           const track = tracks[currentIndex];
           btn.disabled = false;
-          label.textContent = `Download "${track.title.replace(/\s*[🎵🎧❤️💞💗🌌🌿🔥🌊⚡👩‍❤️‍💋‍👩]+/g, "").trim()}"`;
+          label.textContent = `Download "${track.title.replace(/\s*[🎵🎧❤️💞💗👩‍❤️‍💋‍👩]+/g, "").trim()}"`;
           btn.style.borderColor = "rgba(255,78,205,0.5)";
         } else {
           btn.disabled = true;
