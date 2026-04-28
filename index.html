@@ -828,6 +828,21 @@
               >
             </div>
 
+            <!-- Download Button -->
+            <div class="mt-4">
+              <button
+                id="download-btn"
+                onclick="downloadCurrentTrack()"
+                class="w-full flex items-center justify-center gap-2 py-2.5 rounded-2xl transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+                style="background: rgba(255,78,205,0.1); border: 1px solid rgba(255,78,205,0.25); color: #ffaede;"
+                disabled
+                title="Download this track"
+              >
+                <span class="material-symbols-outlined" style="font-size:18px; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;">download</span>
+                <span class="text-sm font-label font-medium" id="download-btn-label">Select a track to download</span>
+              </button>
+            </div>
+
             <!-- Hidden audio element -->
             <audio id="audio-player" preload="metadata"></audio>
           </div>
@@ -859,7 +874,7 @@
           duration: "3:23",
           file: "m1.mp3", // Change to your actual file path
           coverClass: "cover-1",
-          coverEmoji: "🌌",
+          coverEmoji: "👩‍❤️‍💋‍👩",
           coverImage: "p1.jpg", // Set to image path like "covers/track1.jpg" if you have cover images
           year: "2026",
         },
@@ -871,7 +886,7 @@
           duration: "3:16",
           file: "m2.mp3",
           coverClass: "cover-2",
-          coverEmoji: "🌿",
+          coverEmoji: "❤️",
           coverImage: "p2.jpeg",
           year: "2026",
         },
@@ -883,19 +898,19 @@
           duration: "3:34",
           file: "m3.mp3",
           coverClass: "cover-3",
-          coverEmoji: "🔥",
+          coverEmoji: "💗",
           coverImage: "p3.jpeg",
           year: "2026",
         },
         {
           id: 4,
-          title: "Mysha-An Unfinished Story 💞",
+          title: "An Unfinished Story-Mysha 💞",
           artist: "Asadullah Atik",
           genre: " Hindi",
           duration: "4:24",
           file: "m4.mp3",
           coverClass: "cover-4",
-          coverEmoji: "🌊",
+          coverEmoji: "💞",
           coverImage: "p4.jpeg",
           year: "2026",
         },
@@ -976,6 +991,9 @@
               <button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary/20 transition-all" onclick="event.stopPropagation(); likeTrack(${idx}, this)">
                 <span class="material-symbols-outlined like-icon" style="font-size:18px; color:rgba(227,224,243,0.4);">favorite</span>
               </button>
+              <button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-secondary/20 transition-all" onclick="event.stopPropagation(); downloadTrack(${idx})" title="Download">
+                <span class="material-symbols-outlined" style="font-size:18px; color:rgba(201,190,255,0.5); font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;">download</span>
+              </button>
             </div>
           `;
           trackListEl.appendChild(el);
@@ -998,6 +1016,7 @@
         }
 
         currentIndex = idx;
+        updateDownloadBtn();
         const track = tracks[idx];
 
         // Update main player cover
@@ -1214,6 +1233,41 @@
       }
 
       // ─────────────────────────────────────────
+      // Download
+      // ─────────────────────────────────────────
+      function downloadTrack(idx) {
+        const track = tracks[idx];
+        const a = document.createElement("a");
+        a.href = track.file;
+        a.download = `${track.title} - ${track.artist}.mp3`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      function downloadCurrentTrack() {
+        if (currentIndex < 0) return;
+        downloadTrack(currentIndex);
+      }
+
+      // Update download button state when track changes
+      function updateDownloadBtn() {
+        const btn = document.getElementById("download-btn");
+        const label = document.getElementById("download-btn-label");
+        if (!btn || !label) return;
+        if (currentIndex >= 0) {
+          const track = tracks[currentIndex];
+          btn.disabled = false;
+          label.textContent = `Download "${track.title.replace(/\s*[🎵🎧❤️💞💗👩‍❤️‍💋‍👩]+/g, "").trim()}"`;
+          btn.style.borderColor = "rgba(255,78,205,0.5)";
+        } else {
+          btn.disabled = true;
+          label.textContent = "Select a track to download";
+          btn.style.borderColor = "rgba(255,78,205,0.25)";
+        }
+      }
+
+      // ─────────────────────────────────────────
       // Cursor ripple
       // ─────────────────────────────────────────
       const cursor = document.querySelector(".cursor-ripple");
@@ -1229,12 +1283,12 @@
       // ─────────────────────────────────────────
       // Navbar
       // ─────────────────────────────────────────
-      fetch("navbar.html")
-        .then((r) => r.text())
-        .then((d) => {
-          document.getElementById("navbar").innerHTML = d;
-        })
-        .catch(() => {});
+      // fetch("navbar.html")
+      //   .then((r) => r.text())
+      //   .then((d) => {
+      //     document.getElementById("navbar").innerHTML = d;
+      //   })
+      //   .catch(() => {});
 
     
 
