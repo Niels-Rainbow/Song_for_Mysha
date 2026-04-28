@@ -1236,17 +1236,13 @@
         })
         .catch(() => {});
 
-      // Auth check (matches your site)
-      function checkAuth() {
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        if (!isLoggedIn) window.location.href = "login.html";
-      }
+    
 
       // ─────────────────────────────────────────
       // Init
       // ─────────────────────────────────────────
       document.addEventListener("DOMContentLoaded", () => {
-        checkAuth();
+        
         renderTrackList();
       });
     </script>
